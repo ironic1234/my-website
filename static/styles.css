@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    background: #1e1e2e;
+    font-family: "Hack", monospace;
+    color: #fab387;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    font-family: "Hack Bold", monospace;
+}
+
+.nav-bar {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+.content {
+    margin-top: 2rem;
+    max-width: 800px;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* --- Responsive tweaks for mobile --- */
+@media (max-width: 600px) {
+    .title {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .nav-bar {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 0 1rem;
+        font-size: 0.9rem;
+    }
+
+    .nav {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+}

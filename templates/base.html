@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{{ title }} | Ronak Jain</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            @font-face {
+                font-family: "Hack";
+                src: url("{{url_for('static', filename='fonts/HackNerdFont-Regular.ttf')}}")
+                    format("truetype");
+                font-weight: 400;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "Hack Bold";
+                src: url("{{url_for('static', filename='fonts/HackNerdFont-Bold.ttf')}}")
+                    format("truetype");
+                font-weight: 700;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: "Hack Italic";
+                src: url("{{url_for('static', filename='fonts/HackNerdFont-Italic.ttf')}}")
+                    format("truetype");
+                font-weight: 400;
+                font-style: italic;
+                font-display: swap;
+            }
+        </style>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='styles.css') }}"
+        />
+    </head>
+    <body>
+        <div class="title">Ronak Jain</div>
+        <div class="nav-bar">
+            <div class="nav nav-left">
+                <a href="{{ url_for(alt_home) }}" class="desktop-only"
+                    >{{ alt_home.capitalize() }}</a
+                >
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('projects') }}">Projects</a>
+            </div>
+            <div class="nav nav-right">
+                <a href="{{ url_for('blog') }}">Blog</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('resume') }}">Resume</a>
+            </div>
+        </div>
+
+        <div class="content">{% block content %}{% endblock %}</div>
+    </body>
+</html>
