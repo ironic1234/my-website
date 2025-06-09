@@ -7,7 +7,7 @@
         <style>
             @font-face {
                 font-family: "Hack";
-                src: url("{{url_for('static', filename='fonts/HackNerdFont-Regular.ttf')}}")
+                src: url("{{ url_for('static', filename='fonts/HackNerdFont-Regular.ttf') }}")
                     format("truetype");
                 font-weight: 400;
                 font-style: normal;
@@ -15,7 +15,7 @@
             }
             @font-face {
                 font-family: "Hack Bold";
-                src: url("{{url_for('static', filename='fonts/HackNerdFont-Bold.ttf')}}")
+                src: url("{{ url_for('static', filename='fonts/HackNerdFont-Bold.ttf') }}")
                     format("truetype");
                 font-weight: 700;
                 font-style: normal;
@@ -23,7 +23,7 @@
             }
             @font-face {
                 font-family: "Hack Italic";
-                src: url("{{url_for('static', filename='fonts/HackNerdFont-Italic.ttf')}}")
+                src: url("{{ url_for('static', filename='fonts/HackNerdFont-Italic.ttf') }}")
                     format("truetype");
                 font-weight: 400;
                 font-style: italic;
@@ -48,7 +48,9 @@
             <div class="nav nav-right">
                 <a href="{{ url_for('blog') }}">Blog</a>
                 <a href="{{ url_for('contact') }}">Contact</a>
-                <a href="{{ url_for('resume') }}">Resume</a>
+                <a href="https://github.com/ironic1234/Resume/releases/latest"
+                    >Resume</a
+                >
             </div>
         </div>
 

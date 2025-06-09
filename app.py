@@ -26,9 +26,5 @@ def blog():
 def contact():
     return render_template("contact.html", title="Contact")
 
-@app.route("/resume")
-def resume():
-    return render_template("resume.html", title="Resume")
-
 if __name__ == "__main__":
     app.run(debug=True)
