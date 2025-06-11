@@ -20,7 +20,7 @@ def projects():
 
 @app.route("/blog")
 def blog():
-    return render_template("blog.html", title="Blog")
+    return render_template("blog/index.html", title="Blog")
 
 @app.route("/contact")
 def contact():
