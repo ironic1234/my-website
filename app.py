@@ -10,21 +10,21 @@ def home():
 def terminal():
     return render_template("terminal.html", title="Terminal", alt_home="home")
 
-@app.route("/about")
-def about():
-    return render_template("about.html", title="About")
-
 @app.route("/projects")
 def projects():
-    return render_template("projects.html", title="Projects")
+    return render_template("projects.html", title="Projects", alt_home="home")
 
 @app.route("/blog")
 def blog():
-    return render_template("blog/index.html", title="Blog")
+    return render_template("blog/index.html", title="Blog", alt_home="home")
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html", title="Contact")
+    return render_template("contact.html", title="Contact", alt_home="home")
+
+@app.route("/blog/<path:post>")
+def blog_post(post):
+    return render_template(f"blog/{post}.html", title=post.replace("-", " ").title(), alt_home="home")
 
 if __name__ == "__main__":
     app.run(debug=True)

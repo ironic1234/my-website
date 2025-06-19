@@ -7,5 +7,31 @@
         window.location.href = "{{ url_for('terminal') }}";
     }
 </script>
-<p>Welcome to my homepage!</p>
+<div class="home-container">
+    <div class="profile-pic">Photo of me</div>
+    <p class="home-subtitle">EE @ Purdue</p>
+    <div class="social-icons">
+        <a
+            href="https://github.com/ironic1234"
+            target="_blank"
+            aria-label="GitHub"
+        >
+            <i class="fa-brands fa-github"></i>
+        </a>
+        <a
+            href="https://instagram.com/yourusername"
+            target="_blank"
+            aria-label="Instagram"
+        >
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a
+            href="https://linkedin.com/in/yourusername"
+            target="_blank"
+            aria-label="LinkedIn"
+        >
+            <i class="fa-brands fa-linkedin"></i>
+        </a>
+    </div>
+</div>
 {% endblock %}

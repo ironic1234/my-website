@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base-blog.html" %} {% block content %}
 <script>
     const redirected = sessionStorage.getItem("redirectedToTerminal");
 
@@ -7,5 +7,6 @@
         window.location.href = "{{ url_for('terminal') }}";
     }
 </script>
-<p>Welcome to my blog</p>
+<h2 class="blog-title">Welcome to my Blog!</h2>
+<p class="blog-text">This is my simple blog page.</p>
 {% endblock %}

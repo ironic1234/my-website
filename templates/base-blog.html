@@ -34,10 +34,6 @@
             rel="stylesheet"
             href="{{ url_for('static', filename='styles.css') }}"
         />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        />
     </head>
     <body>
         <div class="title">Ronak Jain</div>
@@ -46,10 +42,11 @@
                 <a href="{{ url_for(alt_home) }}" class="desktop-only"
                     >{{ alt_home.capitalize() }}</a
                 >
+                <a href="{{ url_for('about') }}">About</a>
                 <a href="{{ url_for('projects') }}">Projects</a>
-                <a href="{{ url_for('blog') }}">Blog</a>
             </div>
             <div class="nav nav-right">
+                <a href="{{ url_for('blog') }}">Blog</a>
                 <a href="{{ url_for('contact') }}">Contact</a>
                 <a
                     href="https://github.com/ironic1234/Resume/releases/latest/download/Ronak_Jain_Resume.pdf"
@@ -58,13 +55,6 @@
             </div>
         </div>
 
-        <div class="content">{% block content %}{% endblock %}</div>
-
-        <footer class="site-footer">
-            Ronak Jain 2025 &mdash; Built on
-            <a href="https://github.com/ironic1234/ronfire" target="_blank"
-                >ronfire</a
-            >
-        </footer>
+        <div class="content blog">{% block content %}{% endblock %}</div>
     </body>
 </html>
