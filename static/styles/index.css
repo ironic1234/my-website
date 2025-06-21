@@ -46,7 +46,7 @@ a:hover {
 
 .content {
     margin-top: 2rem;
-    width: 90%;
+    width: 80%;
     text-align: center;
 }
 
@@ -89,6 +89,15 @@ a:hover {
     min-height: 240px;
 }
 
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 50%;
+}
+
 .home-subtitle {
     font-size: 1rem;
     margin-bottom: 3%;
@@ -119,7 +128,6 @@ a:hover {
     font-size: 0.5rem;
     font-family: "Hack", monospace;
     color: #fab387;
-    width: 100%;
     background-color: transparent;
 }
 

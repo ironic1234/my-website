@@ -32,7 +32,7 @@
         </style>
         <link
             rel="stylesheet"
-            href="{{ url_for('static', filename='styles.css') }}"
+            href="{{ url_for('static', filename='styles/index.css') }}"
         />
     </head>
     <body>
@@ -42,12 +42,10 @@
                 <a href="{{ url_for(alt_home) }}" class="desktop-only"
                     >{{ alt_home.capitalize() }}</a
                 >
-                <a href="{{ url_for('about') }}">About</a>
                 <a href="{{ url_for('projects') }}">Projects</a>
             </div>
             <div class="nav nav-right">
                 <a href="{{ url_for('blog') }}">Blog</a>
-                <a href="{{ url_for('contact') }}">Contact</a>
                 <a
                     href="https://github.com/ironic1234/Resume/releases/latest/download/Ronak_Jain_Resume.pdf"
                     >Resume</a
@@ -56,5 +54,11 @@
         </div>
 
         <div class="content blog">{% block content %}{% endblock %}</div>
+        <footer class="site-footer">
+            Ronak Jain 2025 &mdash; Built on
+            <a href="https://github.com/ironic1234/ronfire" target="_blank"
+                >ronfire</a
+            >
+        </footer>
     </body>
 </html>

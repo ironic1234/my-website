@@ -18,10 +18,6 @@ def projects():
 def blog():
     return render_template("blog/index.html", title="Blog", alt_home="home")
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html", title="Contact", alt_home="home")
-
 @app.route("/blog/<path:post>")
 def blog_post(post):
     return render_template(f"blog/{post}.html", title=post.replace("-", " ").title(), alt_home="home")

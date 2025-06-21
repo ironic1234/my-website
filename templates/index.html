@@ -8,7 +8,12 @@
     }
 </script>
 <div class="home-container">
-    <div class="profile-pic">Photo of me</div>
+    <div class="profile-pic">
+        <img
+            src="{{ url_for('static', filename='images/me.webp') }}"
+            alt="Profile Picture"
+        />
+    </div>
     <p class="home-subtitle">EE @ Purdue</p>
     <div class="social-icons">
         <a
@@ -19,14 +24,14 @@
             <i class="fa-brands fa-github"></i>
         </a>
         <a
-            href="https://instagram.com/yourusername"
+            href="https://instagram.com/ronakjain628"
             target="_blank"
             aria-label="Instagram"
         >
             <i class="fa-brands fa-instagram"></i>
         </a>
         <a
-            href="https://linkedin.com/in/yourusername"
+            href="https://linkedin.com/in/ronakpjain"
             target="_blank"
             aria-label="LinkedIn"
         >
