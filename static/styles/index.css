@@ -152,8 +152,10 @@ a:hover {
 
 .xterm {
     padding: 12px;
-    scrollbar-color: #1e1e2e;
-    scrollbar-width: none;
+}
+
+.xterm .xterm-viewport {
+    overflow-y: hidden !important;
 }
 
 /* --- Responsive tweaks for mobile --- */
