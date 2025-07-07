@@ -4,5 +4,29 @@
         window.location.href = "{{ url_for('home') }}";
     }
 </script>
-<p>This is the terminal-style homepage.</p>
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='styles/xterm.css') }}"
+/>
+<div id="terminal-container"></div>
+<script src="{{ url_for('static', filename='js/xterm.js') }}"></script>
+<script>
+    const term = new Terminal({
+        fontFamily: "Menlo, Monaco, monospace",
+        fontSize: 12,
+        cursorBlink: true,
+        theme: {
+            background: "#1e1e2e", // matches macOS terminal
+            foreground: "#fab387", // soft white
+        },
+        scrollback: 0,
+    });
+
+    term.open(document.getElementById("terminal-container"));
+    term.resize(80, 24);
+
+    // Simulate macOS login prompt
+    term.writeln("Last login: Mon Jul  7 15:21:47 on ttys001");
+    term.write("ronak@Hera ~% ");
+</script>
 {% endblock %}

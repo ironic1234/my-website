@@ -46,7 +46,6 @@ a:hover {
 
 .content {
     margin-top: 2rem;
-    width: 80%;
     text-align: center;
 }
 
@@ -139,6 +138,22 @@ a:hover {
 
 .site-footer a:hover {
     opacity: 0.7;
+}
+
+#terminal-container {
+    width: 500px;
+    height: 100%;
+    text-align: left;
+    border-radius: 12px;
+    border: 2px solid #fab387;
+    overflow: hidden;
+    margin: 3rem auto;
+}
+
+.xterm {
+    padding: 12px;
+    scrollbar-color: #1e1e2e;
+    scrollbar-width: none;
 }
 
 /* --- Responsive tweaks for mobile --- */
