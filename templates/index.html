@@ -1,12 +1,4 @@
 {% extends "base.html" %} {% block content %}
-<script>
-    const redirected = sessionStorage.getItem("redirectedToTerminal");
-
-    if (window.innerWidth >= 600 && !redirected) {
-        sessionStorage.setItem("redirectedToTerminal", "true");
-        window.location.href = "{{ url_for('terminal') }}";
-    }
-</script>
 <div class="home-container">
     <div class="profile-pic">
         <img

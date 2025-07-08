@@ -1,9 +1,4 @@
 {% extends "base.html" %} {% block content %}
-<script>
-    if (window.innerWidth < 600) {
-        window.location.href = "{{ url_for('home') }}";
-    }
-</script>
 <link
     rel="stylesheet"
     href="{{ url_for('static', filename='styles/xterm.css') }}"
