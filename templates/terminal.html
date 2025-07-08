@@ -28,7 +28,7 @@
 
     const now = new Date();
     const timeString = now.toString().split(" ").slice(0, 5).join(" ");
-    term.writeln(`Last login: ${timeString} on ttys001`);
+    term.writeln("Last login: ${timeString} on ttys001 (type help for help)");
 
     let input = "";
     let cwd = "~";
@@ -101,7 +101,7 @@
             } else if (cmd === "cd") {
                 if (!arg) {
                     term.writeln(
-                        `\x1b[38;2;255;121;198mUsage: cd <directory>\x1b[0m`,
+                        "\x1b[38;2;255;121;198mUsage: cd <directory>\x1b[0m",
                     );
                 } else if (arg === "..") {
                     const parts = cwd.split("/").filter((p) => p);
@@ -111,38 +111,42 @@
                         cwd = "/";
                     }
                 } else if (dir[arg]) {
-                    cwd = `${cwd}/${arg}`.replace(/\/+/g, "/");
+                    cwd = (cwd + "/" + arg).replace(/\/+/g, "/");
                 } else {
                     term.writeln(
-                        `\x1b[38;2;255;121;198mNo such directory: ${arg}\x1b[0m`,
+                        "\x1b[38;2;255;121;198mNo such directory:" +
+                            arg +
+                            "\x1b[0m",
                     );
                 }
             } else if (cmd === "cat") {
                 if (!arg) {
                     term.writeln(
-                        `\x1b[38;2;255;121;198mUsage: cat <file>\x1b[0m`,
+                        "\x1b[38;2;255;121;198mUsage: cat <file>\x1b[0m",
                     );
                 } else if (dir[arg]) {
                     if (typeof dir[arg] === "string") {
                         term.writeln(dir[arg]);
                     } else {
                         term.writeln(
-                            `\x1b[38;2;255;121;198m${arg} is a directory\x1b[0m`,
+                            "\x1b[38;2;255;121;198m" +
+                                arg +
+                                " is a directory\x1b[0m",
                         );
                     }
                 } else {
                     term.writeln(
-                        `\x1b[38;2;255;121;198mNo such file: ${arg}\x1b[0m`,
+                        "\x1b[38;2;255;121;198mNo such file:" + arg + "\x1b[0m",
                     );
                 }
             } else if (cmd === "name") {
                 if (!arg) {
                     term.writeln(
-                        `\x1b[38;2;255;121;198mUsage: name <new_name>\x1b[0m`,
+                        "\x1b[38;2;255;121;198mUsage: name <new_name>\x1b[0m",
                     );
                 } else {
                     name = arg;
-                    term.writeln(`Name changed to ${name}`);
+                    term.writeln("Name changed to " + name);
                 }
             } else if (cmd === "pwd") {
                 term.writeln(cwd);
@@ -174,7 +178,9 @@
                 );
             } else {
                 term.writeln(
-                    `\x1b[38;2;255;121;198mCommand not found: ${input}\x1b[0m`,
+                    "\x1b[38;2;255;121;198mCommand not found:" +
+                        input +
+                        "\x1b[0m",
                 );
             }
             term.write(getPrompt());
