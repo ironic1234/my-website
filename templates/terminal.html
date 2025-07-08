@@ -30,35 +30,154 @@
     const timeString = now.toString().split(" ").slice(0, 5).join(" ");
     term.writeln(`Last login: ${timeString} on ttys001`);
 
-    const prompt_text =
-        "\x1b[38;2;238;188;224mronak@Hera \x1b[38;2;136;179;249m~\x1b[38;2;172;179;205m$ \x1b[0m";
-
     let input = "";
+    let cwd = "~";
+    let name = "you";
 
-    term.write(prompt_text);
+    const fileSystem = {
+        "~": {
+            "notes.txt": "These are some notes.",
+            "about.txt":
+                "This is a simple fake terminal written with xterm.js.",
+            projects: {
+                "readme.md": "# My Projects\nThese are my cool projects!",
+                "code.js": "console.log('Hello from code.js!');",
+            },
+        },
+    };
+
+    function getCurrentDir() {
+        const parts = cwd.split("/").filter((p) => p);
+        let node = fileSystem["~"];
+        for (let i = 1; i < parts.length; i++) {
+            node = node[parts[i]];
+        }
+
+        return node;
+    }
+
+    function getPrompt() {
+        const cwdName = cwd;
+        return (
+            "\x1b[38;2;238;188;224m" +
+            name +
+            "@Olympus \x1b[38;2;136;179;249m" +
+            cwdName +
+            "\x1b[38;2;172;179;205m$ \x1b[0m"
+        );
+    }
+
+    term.write(getPrompt());
 
     term.onData((data) => {
         console.log(data);
         if (data === "\x0c") {
             term.write("\x1b[2J\x1b[H");
-            term.write(prompt_text);
+            term.write(getPrompt());
             input = "";
             return;
         } else if (data === "\r") {
             term.write("\r\n");
+            const args = input.trim().split(" ");
+            const cmd = args[0].toLowerCase();
+            const arg = args[1];
+
+            const dir = getCurrentDir();
+
             if (input.trim() === "clear") {
                 term.write("\x1b[2J\x1b[H");
-                term.write(prompt_text);
+                term.write(getPrompt());
                 input = "";
                 return;
             } else if (input.trim() === "exit") {
                 window.location.href = "{{ url_for('home') }}";
+            } else if (cmd === "ls") {
+                const items = Object.keys(dir);
+                term.writeln(
+                    items.length > 0
+                        ? items.join("  ")
+                        : "\x1b[38;2;255;121;198mNo files or directories found\x1b[0m",
+                );
+            } else if (cmd === "cd") {
+                if (!arg) {
+                    term.writeln(
+                        `\x1b[38;2;255;121;198mUsage: cd <directory>\x1b[0m`,
+                    );
+                } else if (arg === "..") {
+                    const parts = cwd.split("/").filter((p) => p);
+                    if (parts.length > 1) {
+                        cwd = parts.slice(0, -1).join("/");
+                    } else {
+                        cwd = "/";
+                    }
+                } else if (dir[arg]) {
+                    cwd = `${cwd}/${arg}`.replace(/\/+/g, "/");
+                } else {
+                    term.writeln(
+                        `\x1b[38;2;255;121;198mNo such directory: ${arg}\x1b[0m`,
+                    );
+                }
+            } else if (cmd === "cat") {
+                if (!arg) {
+                    term.writeln(
+                        `\x1b[38;2;255;121;198mUsage: cat <file>\x1b[0m`,
+                    );
+                } else if (dir[arg]) {
+                    if (typeof dir[arg] === "string") {
+                        term.writeln(dir[arg]);
+                    } else {
+                        term.writeln(
+                            `\x1b[38;2;255;121;198m${arg} is a directory\x1b[0m`,
+                        );
+                    }
+                } else {
+                    term.writeln(
+                        `\x1b[38;2;255;121;198mNo such file: ${arg}\x1b[0m`,
+                    );
+                }
+            } else if (cmd === "name") {
+                if (!arg) {
+                    term.writeln(
+                        `\x1b[38;2;255;121;198mUsage: name <new_name>\x1b[0m`,
+                    );
+                } else {
+                    name = arg;
+                    term.writeln(`Name changed to ${name}`);
+                }
+            } else if (cmd === "pwd") {
+                term.writeln(cwd);
+            } else if (cmd === "help") {
+                term.writeln(
+                    "\x1b[38;2;136;179;249mAvailable commands:\x1b[0m",
+                );
+                term.writeln("");
+                term.writeln(
+                    "  \x1b[38;2;136;179;249mls\x1b[0m                - List files and directories",
+                );
+                term.writeln(
+                    "  \x1b[38;2;136;179;249mcd <directory>\x1b[0m    - Change directory",
+                );
+                term.writeln(
+                    "  \x1b[38;2;136;179;249mcat <file>\x1b[0m        - Display file contents",
+                );
+                term.writeln(
+                    "  \x1b[38;2;136;179;249mpwd\x1b[0m               - Print working directory",
+                );
+                term.writeln(
+                    "  \x1b[38;2;136;179;249mname <new_name>\x1b[0m   - Change your name",
+                );
+                term.writeln(
+                    "  \x1b[38;2;136;179;249mclear\x1b[0m             - Clear the terminal",
+                );
+                term.writeln(
+                    "  \x1b[38;2;136;179;249mexit\x1b[0m              - Exit the terminal\n",
+                );
             } else {
                 term.writeln(
                     `\x1b[38;2;255;121;198mCommand not found: ${input}\x1b[0m`,
                 );
-                term.write(prompt_text);
             }
+            term.write(getPrompt());
             input = "";
         } else if (data === "\x7f") {
             // Handle backspace
