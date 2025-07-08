@@ -12,21 +12,64 @@
 <script src="{{ url_for('static', filename='js/xterm.js') }}"></script>
 <script>
     const term = new Terminal({
-        fontFamily: "Menlo, Monaco, monospace",
+        fontFamily: "Hack Regular, monospace",
         fontSize: 12,
         cursorBlink: true,
         theme: {
-            background: "#1e1e2e", // matches macOS terminal
-            foreground: "#fab387", // soft white
+            background: "#1e1e2e",
+            foreground: "#cdd6f4", // bluish white
         },
         lineWrap: true,
     });
 
     term.open(document.getElementById("terminal-container"));
-    term.resize(80, 24);
+    term.resize(66, 24);
+    term.focus();
 
-    // Simulate macOS login prompt
-    term.writeln("Last login: Mon Jul  7 15:21:47 on ttys001");
-    term.write("ronak@Hera ~% ");
+    const now = new Date();
+    const timeString = now.toString().split(" ").slice(0, 5).join(" ");
+    term.writeln(`Last login: ${timeString} on ttys001`);
+
+    const prompt_text =
+        "\x1b[38;2;238;188;224mronak@Hera \x1b[38;2;136;179;249m~\x1b[38;2;172;179;205m$ \x1b[0m";
+
+    let input = "";
+
+    term.write(prompt_text);
+
+    term.onData((data) => {
+        console.log(data);
+        if (data === "\x0c") {
+            term.write("\x1b[2J\x1b[H");
+            term.write(prompt_text);
+            input = "";
+            return;
+        } else if (data === "\r") {
+            term.write("\r\n");
+            if (input.trim() === "clear") {
+                term.write("\x1b[2J\x1b[H");
+                term.write(prompt_text);
+                input = "";
+                return;
+            } else if (input.trim() === "exit") {
+                window.location.href = "{{ url_for('home') }}";
+            } else {
+                term.writeln(
+                    `\x1b[38;2;255;121;198mCommand not found: ${input}\x1b[0m`,
+                );
+                term.write(prompt_text);
+            }
+            input = "";
+        } else if (data === "\x7f") {
+            // Handle backspace
+            if (input.length > 0) {
+                input = input.slice(0, -1);
+                term.write("\b \b");
+            }
+        } else {
+            input += data;
+            term.write(data);
+        }
+    });
 </script>
 {% endblock %}
