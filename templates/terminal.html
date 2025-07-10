@@ -155,7 +155,7 @@
                     }
                 }
             } else if (cmd === "cd") {
-                if (!arg) {
+                if (!arg || typeof (dir[arg] === "string")) {
                     term.writeln(
                         "\x1b[38;2;255;121;198mUsage: cd <directory>\x1b[0m",
                     );
