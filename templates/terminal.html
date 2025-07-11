@@ -3,6 +3,7 @@
     rel="stylesheet"
     href="{{ url_for('static', filename='styles/xterm.css') }}"
 />
+Type help for help, Tab to complete, Ctrl + L to clear
 <div id="terminal-container"></div>
 <script src="{{ url_for('static', filename='js/xterm.js') }}"></script>
 <script>
@@ -24,7 +25,6 @@
     const now = new Date();
     const timeString = now.toString().split(" ").slice(0, 5).join(" ");
     term.writeln("Last login: " + timeString + " on ttys001");
-    term.writeln("\nType help for help\n");
 
     let input = "";
     let cwd = "~";
@@ -155,9 +155,13 @@
                     }
                 }
             } else if (cmd === "cd") {
-                if (!arg || typeof dir[arg] === "string") {
+                if (!arg) {
+                    cwd = "~";
+                } else if (typeof dir[arg] === "string") {
                     term.writeln(
-                        "\x1b[38;2;255;121;198mUsage: cd <directory>\x1b[0m",
+                        "\x1b[38;2;255;121;198m" +
+                            arg +
+                            " is a file, not a directory\x1b[0m",
                     );
                 } else if (arg === "..") {
                     const parts = cwd.split("/").filter((p) => p);
