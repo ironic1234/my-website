@@ -88,6 +88,8 @@ Type help for help, Tab to complete, Ctrl + L to clear
     let input = "";
     let cwd = "~";
     let name = "you";
+    let history = [];
+    let historyIndex = -1;
 
     const fileSystem = {
         "~": {
@@ -135,7 +137,6 @@ Type help for help, Tab to complete, Ctrl + L to clear
                     "\x1b[38;2;150;200;250m----\x1b[0m\r\n" +
                     "- Spotlight replacement because spotlight has 🤢 colors\r\n" +
                     "- Tauri with Rust backend (finding and opening apps) and Svelte \r\nfrontend\r\n" +
-                    "- Probably do a swift rewrite and implement more features \r\n(especially because tahoe's spotlight looks actually good)\r\n" +
                     "\x1b[2mGitHub: https://github.com/ironic1234/mofi\x1b[0m",
             },
         },
@@ -160,6 +161,10 @@ Type help for help, Tab to complete, Ctrl + L to clear
             cwdName +
             "\x1b[38;2;172;179;205m$ \x1b[0m"
         );
+    }
+
+    function updateInputLine() {
+        term.write("\x1b[2K\r" + getPrompt() + input);
     }
 
     term.write(getPrompt());
@@ -303,6 +308,12 @@ Type help for help, Tab to complete, Ctrl + L to clear
                 );
             }
             term.write(getPrompt());
+
+            if (input.trim() !== "") {
+                history.push(input.trim());
+            }
+            historyIndex = history.length;
+
             input = "";
         } else if (data === "\t") {
             const dir = getCurrentDir();
@@ -331,6 +342,23 @@ Type help for help, Tab to complete, Ctrl + L to clear
                 input = input.slice(0, -1);
                 term.write("\b \b");
             }
+        } else if (data === "\x1b[A") {
+            // Up arrow
+            if (historyIndex > 0) {
+                historyIndex--;
+                input = history[historyIndex];
+                updateInputLine();
+            }
+        } else if (data === "\x1b[B") {
+            // Down arrow
+            if (historyIndex < history.length - 1) {
+                historyIndex++;
+                input = history[historyIndex];
+            } else {
+                historyIndex = history.length;
+                input = "";
+            }
+            updateInputLine();
         } else {
             input += data;
             term.write(data);
