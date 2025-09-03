@@ -34,6 +34,10 @@
             rel="stylesheet"
             href="/static/styles/index.css"
         />
+        <link
+            rel="stylesheet"
+            href="/static/fontawesome/css/all.min.css"
+        />
     </head>
     <body>
         <div class="title">Ronak Jain</div>
@@ -53,82 +57,154 @@
             </div>
         </div>
 
-        <div class="content blog">
-<div id="robomasters" style="font-size: 10px; width: 80%">
-    <h1>
-        <a href="https://github.com/PurdueRM/Embedded-Control" target="_blank"
-            >Purdue Robomasters</a
-        >
-    </h1>
-    <ul>
-        <li>Embedded C for robot controls with STM32 microcontrollers</li>
-        <li>
-            Working on complete rewrite of codebase with support for new
-            mainboard
-        </li>
-        <li>Hopefully work on some CV stuff next year for autoaim</li>
-    </ul>
+        <div class="content">
+
+<style>
+    .project-list {
+        width: 90%;
+        max-width: 800px;
+        margin: 2rem auto;
+        font-size: 1rem;
+    }
+
+    a.project-card {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+        border: 1px solid #fab387;
+        border-radius: 12px;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+        transition:
+            transform 0.2s ease-in-out,
+            box-shadow 0.2s ease-in-out;
+    }
+
+    a.project-card:hover {
+        transform: translateY(-4px);
+        opacity: 1; !important
+    }
+
+    a.project-card:hover h1 {
+        text-decoration: underline;
+    }
+
+    .project-list > a.project-card:last-child {
+        margin-bottom: 0;
+    }
+
+    .project-card h1 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.6rem;
+    }
+
+    .project-card ul {
+        padding-left: 20px;
+        margin: 0;
+        list-style-type: disc;
+    }
+
+    .project-card li {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+    }
+</style>
+
+<div class="project-list">
+    <a
+        id="robomasters"
+        class="project-card"
+        href="https://github.com/PurdueRM/Embedded-Control"
+        target="_blank"
+    >
+        <h1>Purdue Robomasters</h1>
+        <ul>
+            <li>Embedded C for robot controls with STM32 microcontrollers</li>
+            <li>
+                Working on complete rewrite of codebase with support for new
+                mainboard
+            </li>
+            <li>Hopefully work on some CV stuff next year for autoaim</li>
+        </ul>
+    </a>
+
+    <a
+        id="per"
+        class="project-card"
+        href="https://github.com/PurdueElectricRacing/firmware"
+        target="_blank"
+    >
+        <h1>Purdue Electric Racing</h1>
+        <ul>
+            <li>Designing PCBs for testing with some power stuff</li>
+            <li>
+                Porting scheduler to FreeRTOS (mostly figuring out headers and
+                cmake)
+            </li>
+            <li>Writing HAL for high speed external oscillator</li>
+        </ul>
+    </a>
+
+    <a
+        id="ronfire"
+        class="project-card"
+        href="https://github.com/ironic1234/ronfire"
+        target="_blank"
+    >
+        <h1>Ronfire</h1>
+        <ul>
+            <li>Custom HTTP webserver in Rust with Tokio for async</li>
+            <li>
+                Serves responses on a Unix socket (caddy reverse proxy for now)
+            </li>
+            <li>
+                Working on features for actual usage including config file for
+                dynamic routing and serving
+            </li>
+            <li>
+                Maybe write my own reverse proxy with (custom?) HTTP2 support
+            </li>
+        </ul>
+    </a>
+
+    <a
+        id="ronq"
+        class="project-card"
+        href="https://github.com/ironic1234/ronq"
+        target="_blank"
+    >
+        <h1>Ronq</h1>
+        <ul>
+            <li>Concurrent task runner with C++, fork(), and exec()</li>
+            <li>Docker compose without the containers</li>
+            <li>Made for testing stuff (ronfire + caddy)</li>
+            <li>
+                Need to add configuration support for different types of tasks
+                like hidden and in front (openocd + gdb)
+            </li>
+        </ul>
+    </a>
+
+    <a
+        id="mofi"
+        class="project-card"
+        href="https://github.com/ironic1234/mofi"
+        target="_blank"
+    >
+        <h1>Mofi</h1>
+        <ul>
+            <li>Spotlight replacement because spotlight has 🤢 colors</li>
+            <li>
+                Tauri with Rust backend (finding and opening apps) and Svelte
+                frontend
+            </li>
+        </ul>
+    </a>
 </div>
-<div id="per" style="font-size: 10px; width: 80%">
-    <h1>
-        <a
-            href="https://github.com/PurdueElectricRacing/firmware"
-            target="_blank"
-            >Purdue Electric Racing</a
-        >
-    </h1>
-    <ul>
-        <li>Designing PCBs for testing with some power stuff</li>
-        <li>
-            Porting scheduler to FreeRTOS (mostly figuring out headers and
-            cmake)
-        </li>
-        <li>Writing HAL for high speed external oscillator</li>
-    </ul>
+
 </div>
-<div id="ronfire" style="font-size: 10px; width: 80%">
-    <h1>
-        <a href="https://github.com/ironic1234/ronfire" target="_blank"
-            >Ronfire</a
-        >
-    </h1>
-    <ul>
-        <li>Custom HTTP webserver in Rust with Tokio for async</li>
-        <li>Serves responses on a Unix socket (caddy reverse proxy for now)</li>
-        <li>
-            Working on features for actual usage including config file for
-            dynamic routing and serving
-        </li>
-        <li>Maybe write my own reverse proxy with (custom?) HTTP2 support</li>
-    </ul>
-</div>
-<div id="ronq" style="font-size: 10px; width: 80%">
-    <h1>
-        <a href="https://github.com/ironic1234/ronq" target="_blank">Ronq</a>
-    </h1>
-    <ul>
-        <li>Concurrent task runner with C++, fork(), and exec()</li>
-        <li>Docker compose without the containers</li>
-        <li>Made for testing stuff (ronfire + caddy)</li>
-        <li>
-            Need to add configuration support for different types of tasks like
-            hidden and in front (openocd + gdb)
-        </li>
-    </ul>
-</div>
-<div id="mofi" style="font-size: 10px; width: 80%">
-    <h1>
-        <a href="https://github.com/ironic1234/mofi" target="_blank">Mofi</a>
-    </h1>
-    <ul>
-        <li>Spotlight replacement because spotlight has 🤢 colors</li>
-        <li>
-            Tauri with Rust backend (finding and opening apps) and Svelte
-            frontend
-        </li>
-    </ul>
-</div>
-</div>
+
         <footer class="site-footer">
             Ronak Jain 2025 &mdash; Built on
             <a href="https://github.com/ironic1234/ronfire" target="_blank"
