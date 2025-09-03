@@ -48,6 +48,7 @@ a:hover {
     margin-top: 2rem;
     display: grid;
     place-items: center;
+    width: 100%;
 }
 
 .content.blog {

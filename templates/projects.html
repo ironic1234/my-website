@@ -1,24 +1,29 @@
 {% extends "base.html" %} {% block content %}
 
 <style>
-    .project-list {
-        width: 90%;
-        max-width: 800px;
+    .project-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        width: 100%;
         margin: 2rem auto;
         font-size: 1rem;
     }
 
     a.project-card {
         display: block;
+
+        flex: 0 1 500px;
+
         color: inherit;
         text-decoration: none;
+
         border: 1px solid #fab387;
         border-radius: 12px;
         padding: 1.5rem 2rem;
-        margin-bottom: 2rem;
-        transition:
-            transform 0.2s ease-in-out,
-            box-shadow 0.2s ease-in-out;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
 
     a.project-card:hover {
@@ -52,7 +57,7 @@
     }
 </style>
 
-<div class="project-list">
+<div class="project-grid">
     <a
         id="robomasters"
         class="project-card"
@@ -66,7 +71,6 @@
                 Working on complete rewrite of codebase with support for new
                 mainboard
             </li>
-            <li>Hopefully work on some CV stuff next year for autoaim</li>
         </ul>
     </a>
 
@@ -119,7 +123,10 @@
         <ul>
             <li>Concurrent task runner with C++, fork(), and exec()</li>
             <li>Docker compose without the containers</li>
-            <li>Made for testing stuff (ronfire + caddy)</li>
+            <li>
+                Made for testing stuff (ronfire + caddy) -> Updating for actual
+                deployment (no docker)
+            </li>
             <li>
                 Need to add configuration support for different types of tasks
                 like hidden and in front (openocd + gdb)
