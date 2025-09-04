@@ -61,7 +61,7 @@ fi
 for SIZE in "${SIZES[@]}"; do
     TEMP_FILE="favicon_${SIZE}.png"
     echo "-> Generating ${TEMP_FILE}..."
-    convert \
+    magick \
         -size ${CANVAS_SIZE}x${CANVAS_SIZE} \
         xc:"${BG_COLOR}" \
         -font "${FONT_PATH}" \
@@ -80,7 +80,7 @@ done
 
 # Combine all generated PNGs into a single .ico file
 echo "-> Combining PNGs into ${OUTPUT_FILE}..."
-convert "${PNG_FILES[@]}" "${OUTPUT_FILE}"
+magick "${PNG_FILES[@]}" "${OUTPUT_FILE}"
 
 # Clean up the temporary PNG files
 echo "-> Cleaning up temporary files..."
